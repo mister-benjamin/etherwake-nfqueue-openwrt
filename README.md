@@ -139,29 +139,15 @@ rules are configured in section [Setup firewall rules](#setup-firewall-rules).
 
 The full list of options for a target is:
 
-+-------------+----------+--------------------------------------------------+
 | Option      | Required | Description                                      |
-+=============+==========+==================================================+
+| ----------- | -------- | ------------------------------------------------ |
 | name        | no       | Name of the target, e.g. name=example            |
-+-------------+----------+--------------------------------------------------+
-| mac         | yes      | MAC address of the host to wake up,              |
-|             |          | e.g. mac=00:22:44:66:88:aa                       |
-+-------------+----------+--------------------------------------------------+
-| nfqueue_num | no       | The queue number used for receiving              |
-|             |          | filtered packets, default is nfqueue_num=0       |                   |
-+-------------+----------+--------------------------------------------------+
-| interface   | no       | The interface used for sending the magic packet, |
-|             |          | default is interface=eth0                        |
-+-------------+----------+--------------------------------------------------+
-| broadcast   | no       | Send magic packet to broadcast address,          |
-|             |          | default is broadcast=off                         |
-+-------------+----------+--------------------------------------------------+
-| password    | no       | Set a password (required by some adapters),      |
-|             |          | e.g. password=00:22:44:66:88:aa or 192.168.1.1   |
-+-------------+----------+--------------------------------------------------+
-| enabled     | no       | Optionally disable the target,                   |
-|             |          | default is enabled=true                          |
-+-------------+----------+--------------------------------------------------+
+| mac         | yes      | MAC address of the host to wake up, e.g. mac=00:22:44:66:88:aa |
+| nfqueue_num | no       | The queue number used for receiving filtered packets, default is nfqueue_num=0 |
+| interface   | no       | The interface used for sending the magic packet, default is interface=eth0 |
+| broadcast   | no       | Send magic packet to broadcast address, default is broadcast=off |
+| password    | no       | Set a password (required by some adapters), e.g. password=00:22:44:66:88:aa or 192.168.1.1 |
+| enabled     | no       | Optionally disable the target, default is enabled=true |
 
 After committing your changes, the settings are persisted to
 */etc/config/etherwake-nfqueue*. This is an illustrative example:
