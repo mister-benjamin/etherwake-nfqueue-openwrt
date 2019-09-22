@@ -25,7 +25,7 @@ include $(INCLUDE_DIR)/cmake.mk
 define Package/etherwake-nfqueue
   SECTION:=net
   CATEGORY:=Network
-  DEPENDS:=+libnetfilter-queue +iptables-mod-nfqueue +kmod-ipt-nfqueue
+  DEPENDS:=+libnetfilter-queue +iptables-mod-nfqueue
   TITLE:=Wake up computers on netfilter match
   URL:=https://github.com/mister-benjamin/etherwake-nfqueue
 endef
