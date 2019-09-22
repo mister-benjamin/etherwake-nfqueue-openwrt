@@ -46,11 +46,10 @@ If you haven't, you can follow one of these guides:
 
 * libnetfilter-queue
 * iptables-mod-nfqueue
-* kmod-ipt-nfqueue
 
-They will be automatically selected and compiled for you. If they shouldn't be
+They will be automatically selected and compiled for you. If they are not
 installed on your target device, *opkg* will try to resolve dependencies with
-those packages in the repositories.
+packages in the repositories.
 
 ### Adding the package feed
 
@@ -219,11 +218,27 @@ The physical switch layout is device specific. E.g. the layout for the Linksys
 WRT AC Series is documented
 [here](https://oldwiki.archive.openwrt.org/toh/linksys/wrt_ac_series#switch_layout).
 
-*Note about bridge configurations:*
 
-When using a bridge, it might be necessary to install *kmod-br-netfilter* and add
-`net.bridge.bridge-nf-call-iptables=1` to */etc/sysctl.conf*. Additionally *kmod-ebtables*
-might be required.
+Using two LANs or VLANs with the same network address and bridging them again
+is a trick to setup a transparent (or bridging) firewall on the same subnet.
+This way, packets can be seen by *netfilter* on the router even if the
+packets are not routed. Unfortunately this doesn't help when the host
+which we want to wake up is offline, as the ARP requests for the destination
+IP address are not answered and thus the client trying to reach out to its
+destination will not send any *network layer* packets. We could use *arptables*
+instead to wake the host when someone requests its MAC address, but this
+would probably happen to often and no fine-grained control would be possible.
+
+As a workaround, it might be possible to configure a static ARP entry on your
+router (untested), e.g. with:
+```
+ip neigh add 192.168.0.10 lladdr 00:25:90:00:d5:fd nud permanent dev eth0.3
+```
+Note that this requires the *ip-full* OpenWrt package to be installed.
+
+To make your firewall rules work with bridging, you need to install the
+*kmod-br-netfilter* package and add `net.bridge.bridge-nf-call-iptables=1`
+to */etc/sysctl.conf*.
 
 
 #### Setup firewall rules
@@ -301,7 +316,7 @@ The `--jump NFQUEUE --queue-num 0` options tell the *netfilter*
 framework to enqueue a matching packet to the NFQUEUE number 0. In this
 example, all four rules send the matching packets into queue 0. The
 additional option `--queue-bypass` helps in the situation, when
-**etherwake-nfqueue** shouldn't be running. Packets will then be handled
+**etherwake-nfqueue** isn't running. Packets will then be handled
 as if the rule wasn't present.
 
 
@@ -356,3 +371,8 @@ To see, if your queues are in place, use:
 ```
 cat /proc/net/netfilter/nfnetlink_queue
 ```
+
+## Potential improvements
+
+* Add **LuCI Web Interface** configuration frontend for *targets* and *filter rules*
+* Add an option to set *nice* values for instances
