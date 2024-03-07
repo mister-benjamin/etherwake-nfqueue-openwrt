@@ -14,7 +14,7 @@ PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/mister-benjamin/etherwake-nfqueue.git
 PKG_SOURCE_DATE:=2023-06-20
 PKG_SOURCE_VERSION:=857c8714c4aec2b54ae70655c6d0e13f3c70ed0a
-PKG_MIRROR_HASH:=skip
+PKG_MIRROR_HASH:=5685537c0a904bd27d07810a782d8ab500f1aa117d0fe41631a7b13dc48cb054
 
 PKG_MAINTAINER:=Mister Benjamin <144dbspl@gmail.com>
 PKG_LICENSE:=GPL-2.0-or-later
