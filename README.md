@@ -146,7 +146,7 @@ The full list of options for a target is:
 | interface   | no       | The interface used for sending the magic packet, default is interface=eth0 |
 | broadcast   | no       | Send magic packet to broadcast address, default is broadcast=off |
 | password    | no       | Set a password (required by some adapters), e.g. password=00:22:44:66:88:aa or 192.168.1.1 |
-| defer       | no       | Defer delivery of matched packets until host with specified IP-Adress responds to a ping i.e. has woken up |
+| defer       | no       | Defer delivery of matched packets until host with specified IP address responds to a ping i.e. has woken up |
 | enabled     | no       | Optionally disable the target, default is enabled=true |
 
 After committing your changes, the settings are persisted to
