@@ -321,6 +321,12 @@ additional option `--queue-bypass` helps in the situation, when
 **etherwake-nfqueue** isn't running. Packets will then be handled
 as if the rule wasn't present.
 
+> [!NOTE]
+> In newer version of OpenWrt, iptables has been superseded by nftables. Also, there's no longer the option to edit `/etc/firewall.user` via WebUI. Here are two exemplary nft rules:
+> ```
+> nft insert rule inet fw4 forward_lan iifname "bridge.2" oifname "bridge.1" ip daddr 192.168.0.10 tcp dport 445 ct state new limit rate 3/hour burst 1 packets counter queue num 0 bypass comment \"Wake up NAS on SMB request\"
+> nft insert rule inet fw4 forward_wan iifname "wan" oifname "bridge.1" ip daddr 192.168.0.10 tcp dport 22 ct state new limit rate 3/hour burst 1 packets counter queue num 0 bypass comment \"Wake up NAS on WAN SSH\"
+> ```
 
 ## Disabling targets
 
